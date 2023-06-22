@@ -27,29 +27,43 @@ const plain = {
   z: 25,
 };
 
-
 export default function caesarCipher(string, shift) {
-  let encrypted = ""
+  let encrypted = "";
   // iterate through string to find the value of each letter
   for (let key of string) {
+    // check if key is uppercase
+    let upperCase = false;
+    // convert to lowercase if uppercase
+    if (checkUppercase(key)) {
+      upperCase = true;
+      key = key.toLowerCase()
+    }
     let valuePlain = plain[key];
-    // add the shift factor to the found number
-    let valueCipher = validKey(valuePlain + shift)
-      // find the key that corresponds with the value + shift
-    let keyCipher = findKey(plain, valueCipher)
-    encrypted += keyCipher
+    let valueCipher = validKey(valuePlain + shift);
+    let keyCipher = findKey(plain, valueCipher);
+    // convert back to uppercase if needed
+    if (upperCase) {
+      keyCipher = keyCipher.toUpperCase();
+    }
+    if (keyCipher === undefined) encrypted += key
+    else encrypted += keyCipher;
   }
-  return encrypted
-  // store the new key in a new string
+  return encrypted;
 }
 
+caesarCipher("Netherlands", 5)
+
 function findKey(object, value) {
-  return Object.keys(object).find(key => object[key] === value)
+  return Object.keys(object).find((key) => object[key] === value);
+}
+
+function checkUppercase(string) {
+  return /[A-Z]/.test(string);
 }
 
 function validKey(key) {
   if (key > 25) {
-    return key - 26
+    return key - 26;
   }
-  return key
+  return key;
 }
