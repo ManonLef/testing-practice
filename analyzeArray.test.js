@@ -1,11 +1,11 @@
 import analyzeArray from "./analyzeArray";
 
 test("function doesn't return an array", () => {
-  expect(Array.isArray(analyzeArray([]))).toBeFalsy();
+  expect(Array.isArray(analyzeArray([1, 8, 3, 4, 2, 6]))).toBeFalsy();
 });
 
 test("function returns object", () => {
-  expect(typeof analyzeArray([])).toBe("object");
+  expect(typeof analyzeArray([1, 8, 3, 4, 2, 6])).toBe("object");
 });
 
 test("function returns average. [1, 8, 3, 4, 2, 6] average should return 4", () => {
