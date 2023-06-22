@@ -1,22 +1,3 @@
-export default function caesarCipher(string, shift) {
-  let encrypted = ""
-  // iterate through string to find the value of each letter
-  for (let key of string) {
-    let valuePlain = plain[key];
-    // add the shift factor to the found number
-    let valueCipher = valuePlain + shift;
-      // find the key that corresponds with the value + shift
-    let keyCipher = findKey(plain, valueCipher)
-    encrypted += keyCipher
-  }
-  return encrypted
-  // store the new key in a new string
-}
-
-function findKey(object, value) {
-  return Object.keys(object).find(key => object[key] === value)
-}
-
 const plain = {
   a: 0,
   b: 1,
@@ -45,3 +26,30 @@ const plain = {
   y: 24,
   z: 25,
 };
+
+
+export default function caesarCipher(string, shift) {
+  let encrypted = ""
+  // iterate through string to find the value of each letter
+  for (let key of string) {
+    let valuePlain = plain[key];
+    // add the shift factor to the found number
+    let valueCipher = validKey(valuePlain + shift)
+      // find the key that corresponds with the value + shift
+    let keyCipher = findKey(plain, valueCipher)
+    encrypted += keyCipher
+  }
+  return encrypted
+  // store the new key in a new string
+}
+
+function findKey(object, value) {
+  return Object.keys(object).find(key => object[key] === value)
+}
+
+function validKey(key) {
+  if (key > 25) {
+    return key - 26
+  }
+  return key
+}
