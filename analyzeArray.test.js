@@ -32,3 +32,12 @@ test("function returns all object keys correctly", () => {
     length: 6,
   });
 });
+
+test("function does not give an error when passed an empty array", () => {
+  expect(analyzeArray([])).toStrictEqual({
+    average: null,
+    min: null,
+    max: null,
+    length: 0,
+  });
+});
